@@ -6,10 +6,29 @@
   </head>
   <body>
     <script type="text/javascript">
+      let computerSelection;
+      let playerSelection;
 
       function computerPlay() {
         let choiceNumber = Math.floor(Math.random() * 3)
+
+        switch (choiceNumber) {
+          case 0:
+            computerSelection = "paper"
+            break;
+          case 1:
+            computerSelection = "scissors"
+            break;
+          case 2:
+            computerSelection = "rock"
+            break;
+          default:
+            computerSelection = "Error"
+
+        }
       }
+      computerPlay()
+      console.log(computerSelection)
 
     </script>
   </body>
