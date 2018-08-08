@@ -28,9 +28,56 @@
       // console.log(computerPlay())
 
       function playRound(playerSelection, computerSelection) {
-        if (computerSelection === "Error") {return "There has been an Error with the Computer Choice Somehow..."}
+        if (computerSelection === "Error") {return "There has been an Error with the Computer Choice ...somehow..."}
+
         playerSelection = playerSelection.toLowerCase();
+
+        if (playerSelection === "looseleaf") {
+
+          if (computerSelection === "looseleaf") {
+            return "It's a Tie... 2 Sheets of Looseleaf..."
+          } else if (computerSelection === "blade") {
+            return "Blade cuts YOU-LOoSEleaf."
+          } else {
+            return "You Win! Because, Looseleaf... sits beneath Stone... .. ?"
+          }
+        }
+        else if (playerSelection === "blade") {
+
+          if (computerSelection === "looseleaf"){
+            return "You Win! Your Blade cuts through the Computer's sheet of Looseleaf. YAY!!!!\n" +
+                   "                                                !!!!!!!ARTS N CRAFTZZ~!\n" +
+                   "....Have you ever tried to print on Looseleaf with a dried up ink cartridge?...??"
+          } else if (computerSelection === "blade") {
+            return "It's a Tie. You and the Computer have a dangerous Blade fight...\n"+
+                    "and it's all fun and games....\n"+
+                    "            until, while dancing around with a blade in your hand,\n"+
+                    "                                                 you inevitably hurt yourself.. ."
+          } else {
+            return "You Lose. You may have a Blade, but the computer's a Stone-cold killing Steve Austin-Chine."
+          }
+        }
+        else if (playerSelection === "stone") {
+
+          if (computerSelection === "looseleaf") {
+            return "You Lose... Because... the Computer made you it's PaperWeight... . ..?"
+          } else if (computerSelection === "blade") {
+            return "You Win! The Computer chose Blade, but then you threw a Stone through the screen."
+          } else {
+            return "It's a Tie.\n"+
+                   "          That's Because:\n"+
+                   "                         You both picked Stone."
+          }
+        }
+        else {
+          return "!! You chose something that doesn't work in this game !!\n" +
+                 "Possible Choices: \n"+
+                 "                 \"Looseleaf\", \"Blade\", or \"Stone\""
+        }
       }
+
+      let playerSelection = "blade"
+      console.log(playRound(playerSelection, computerPlay()))
 
     </script>
   </body>
