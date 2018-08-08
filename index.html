@@ -79,6 +79,22 @@
       let playerSelection = "blade"
       console.log(playRound(playerSelection, computerPlay()))
 
+//Score Keeper function
+      let playerScore = 0;
+      let computerScore = 0;
+
+      function scoreKeeper(string) {
+        if (indexOf("Win") === 4) {playerScore += 1}
+        if (indexOf("Lose") === 4 || indexOf("YOU-LOoSEleaf") === 11) {computerScore += 1}
+        return (string + `\nPlayer Score: ${playerScore}\nComputer Score: ${computerScore}`
+      }
+
+//Game function
+      function game() {
+        playerScore = 0;
+        computerScore = 0;
+        console.log(scoreKeeper(playRound(window.prompt("Round 1: Choose your Weapon"), computerPlay())))
+      }
     </script>
   </body>
 </html>
