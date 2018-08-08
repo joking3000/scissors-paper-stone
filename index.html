@@ -77,16 +77,19 @@
       }
 
       let playerSelection = "blade"
-      console.log(playRound(playerSelection, computerPlay()))
+      // console.log(playRound(playerSelection, computerPlay()))
 
 //Score Keeper function
       let playerScore = 0;
       let computerScore = 0;
 
       function scoreKeeper(string) {
-        if (indexOf("Win") === 4) {playerScore += 1}
-        if (indexOf("Lose") === 4 || indexOf("YOU-LOoSEleaf") === 11) {computerScore += 1}
-        return (string + `\nPlayer Score: ${playerScore}\nComputer Score: ${computerScore}`
+        if (string.indexOf("Win") === 4) {playerScore += 1}
+        if (string.indexOf("Lose") === 4 || string.indexOf("YOU-LOoSEleaf") === 11) {computerScore += 1}
+        return ("********\n"+ string +
+                         "\n        =============================================" +
+                         `\n        Player Score :  ${playerScore} |******|  ${computerScore}  : Computer Score`+
+                         "\n        =============================================")
       }
 
 //Game function
@@ -94,7 +97,22 @@
         playerScore = 0;
         computerScore = 0;
         console.log(scoreKeeper(playRound(window.prompt("Round 1: Choose your Weapon"), computerPlay())))
+        console.log(scoreKeeper(playRound(window.prompt("Round 2: Choose your Weapon"), computerPlay())))
+        console.log(scoreKeeper(playRound(window.prompt("Round 3: Choose your Weapon"), computerPlay())))
+        console.log(scoreKeeper(playRound(window.prompt("Round 4: Choose your Weapon"), computerPlay())))
+        console.log(scoreKeeper(playRound(window.prompt("Round 5: Choose your Weapon"), computerPlay())))
+        verdict = playerScore > computerScore ? "Congratulations, You beat a Randomizer" :
+          playerScore < computerScore ? "You Lost" : "It's a Tie.";
+        return ` = = = = = = \n` +
+               `FINAL SCORES:\n` +
+               `= = = = = = =\n` +
+               "===============================================================\n" +
+               ` ** *** |PLAYER SCORE|: ${playerScore}  |* ** *|  ${computerScore} :|COMPUTER SCORE| *** **\n` +
+               "===============================================================\n" +
+               `\n               ---- ${verdict} ----`
       }
+
+      console.log(game())
     </script>
   </body>
 </html>
