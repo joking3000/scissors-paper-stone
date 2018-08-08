@@ -6,26 +6,31 @@
   </head>
   <body>
     <script type="text/javascript">
-    
+
       function computerPlay() {
         let choiceNumber = Math.floor(Math.random() * 3)
 
         switch (choiceNumber) {
           case 0:
-            return "Looseleaf"
+            return "looseleaf"
             break;
           case 1:
-            return "Blade"
+            return "blade"
             break;
           case 2:
-            return "Stone"
+            return "stone"
             break;
           default:
             return "Error"
         }
 
       }
-      console.log(computerPlay())
+      // console.log(computerPlay())
+
+      function playRound(playerSelection, computerSelection) {
+        if (computerSelection === "Error") {return "There has been an Error with the Computer Choice Somehow..."}
+        playerSelection = playerSelection.toLowerCase();
+      }
 
     </script>
   </body>
