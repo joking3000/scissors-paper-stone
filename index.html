@@ -11,6 +11,10 @@
       <button id="looseleaf" type="button" name="button">Looseleaf</button>
       <button id="blade" type="button" name="button">Blade</button>
       <button id="stone" type="button" name="button">Stone</button>
+
+      <p id="results">Y YO YO YO Y</p>
+      <p id="score"></p>
+      <p id="final-results"></p>
     </div>
 
     <script type="text/javascript">
@@ -35,24 +39,28 @@
       }
       // console.log(computerPlay())
 
-      function playRound(playerSelection, computerSelection) {
-        if (computerSelection === "Error") {return "There has been an Error with the Computer Choice ...somehow..."}
+      function playRound(e) {
+        let computerSelection = computerPlay();
+        if (computerSelection === "Error") {return "There has been an Error with the Computer Choice ...somehow..."};
 
-        playerSelection = playerSelection.toLowerCase();
+        let playerSelection = e.target.id;
 
         if (playerSelection === "looseleaf") {
 
           if (computerSelection === "looseleaf") {
             return "It's a Tie... 2 Sheets of Looseleaf..."
           } else if (computerSelection === "blade") {
+            score[1] += 1;
             return "Blade cuts YOU-LOoSEleaf."
           } else {
+            score[0] +=1;
             return "You Win! Because, Looseleaf... sits beneath Stone... .. ?"
           }
         }
         else if (playerSelection === "blade") {
 
           if (computerSelection === "looseleaf"){
+            score[0] += 1;
             return "You Win! Your Blade cuts through the Computer's sheet of Looseleaf. YAY!!!!\n" +
                    "                                                !!!!!!!ARTS N CRAFTZZ~!\n" +
                    "....Have you ever tried to print on Looseleaf with a dried up ink cartridge?...??"
@@ -62,14 +70,17 @@
                     "            until, while dancing around with a blade in your hand,\n"+
                     "                                                 you inevitably hurt yourself.. ."
           } else {
+            score[1] += 1;
             return "You Lose. You may have a Blade, but the computer's a Stone-cold killing Steve Austin-Chine."
           }
         }
         else if (playerSelection === "stone") {
 
           if (computerSelection === "looseleaf") {
+            score[1] += 1;
             return "You Lose... Because... the Computer made you it's PaperWeight... . ..?"
           } else if (computerSelection === "blade") {
+            score[0] +=1;
             return "You Win! The Computer chose Blade, but then you threw a Stone through the screen."
           } else {
             return "It's a Tie.\n"+
@@ -82,46 +93,48 @@
                  "Possible Choices: \n"+
                  "                 \"Looseleaf\", \"Blade\", or \"Stone\""
         }
+
+
       }
 
-      let playerSelection = "blade"
-      // console.log(playRound(playerSelection, computerPlay()))
+      let buttons = document.querySelectorAll(".game-play button");
 
-//Score Keeper function
-      let playerScore = 0;
-      let computerScore = 0;
-
-      function scoreKeeper(string) {
-        if (string.indexOf("Win") === 4) {playerScore += 1}
-        if (string.indexOf("Lose") === 4 || string.indexOf("YOU-LOoSEleaf") === 11) {computerScore += 1}
-        return ("********\n"+ string +
-                         "\n        =============================================" +
-                         `\n        Player Score :  ${playerScore} |******|  ${computerScore}  : Computer Score`+
-                         "\n        =============================================")
+      buttons.forEach(addClickEvents);
+      // console.log(addClickEvents)
+      function addClickEvents(button, i, a) {
+        button.addEventListener("click", htmlPlayRound)
       }
 
-//Game function
-      function game() {
-        playerScore = 0;
-        computerScore = 0;
-        alert("OPEN THE CONSOLE AND GET READY FOR A GAME OF LOOSELEAF, BLADE, STONE!!")
-        console.log(scoreKeeper(playRound(window.prompt("Round 1: Choose your Weapon"), computerPlay())))
-        console.log(scoreKeeper(playRound(window.prompt("Round 2: Choose your Weapon"), computerPlay())))
-        console.log(scoreKeeper(playRound(window.prompt("Round 3: Choose your Weapon"), computerPlay())))
-        console.log(scoreKeeper(playRound(window.prompt("Round 4: Choose your Weapon"), computerPlay())))
-        console.log(scoreKeeper(playRound(window.prompt("Round 5: Choose your Weapon"), computerPlay())))
-        verdict = playerScore > computerScore ? "Congratulations, You beat a Randomizer" :
-          playerScore < computerScore ? "You Lost" : "It's a Tie.";
-        return ` = = = = = = \n` +
-               `FINAL SCORES:\n` +
-               `= = = = = = =\n` +
-               "===============================================================\n" +
-               ` ** *** |PLAYER SCORE|: ${playerScore}  |* ** *|  ${computerScore} :|COMPUTER SCORE| *** **\n` +
-               "===============================================================\n" +
-               `\n               ---- ${verdict} ----`
+      let score = [0, 0]
+      let scoreParagraph = document.querySelector("p#score");
+      let resultsParagraph = document.querySelector("p#results");
+      let finalResultsParagraph = document.querySelector("p#final-results")
+
+      function htmlPlayRound(e) {
+        if (score[0] === 5 || score[1] === 5) return;
+        resultsParagraph.textContent = playRound(e);
+        scoreParagraph.textContent =
+        "\n===============================================================\n" +
+        `PLAYER  SCORE  => : ${score[0]}***${score[1]} : <= COMPUTER SCORE\n` +
+        "===============================================================";
+        if (score[0] === 5 || score[1] === 5) gameFinished();
       }
 
-      // console.log(game())
+      function gameFinished() {
+        resultsParagraph.textContent +=
+        `\n\n!!! GAME OVER !!! \n` +
+        ` = = = = = = \n` +
+        `::FINAL SCORES::\n` +
+        `- - - - - - -`;
+        
+        let verdict;
+        if (score[1] > score[0]){
+          verdict = "Well, You Lost";
+        } else {verdict = "Congratulations, You beat a Randomizer"};
+        finalResultsParagraph.textContent =
+               `---- ${verdict} ----`;
+      }
+
     </script>
   </body>
 </html>

@@ -1,5 +1,12 @@
 .game-play {
-  width: 50%;
+  width: 75%;
   margin: 100px auto;
   text-align: center;
+}
+#results, #score, #final-results {
+  white-space: pre-wrap;
+}
+
+#results {
+  height: 100px;
 }
