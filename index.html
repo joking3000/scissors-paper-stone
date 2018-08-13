@@ -7,12 +7,20 @@
   </head>
   <body>
 
+    <div class="top">
+      <p>
+        It's a game of choice between you and the computer.<br>
+        Select your weapon:
+      </p>
+
+    </div>
+
     <div class="game-play">
       <button id="looseleaf" type="button" name="button">Looseleaf</button>
       <button id="blade" type="button" name="button">Blade</button>
       <button id="stone" type="button" name="button">Stone</button>
 
-      <p id="results">Y YO YO YO Y</p>
+      <p id="results"></p>
       <p id="score"></p>
       <p id="final-results"></p>
     </div>
@@ -37,7 +45,6 @@
         }
 
       }
-      // console.log(computerPlay())
 
       function playRound(e) {
         let computerSelection = computerPlay();
@@ -100,7 +107,6 @@
       let buttons = document.querySelectorAll(".game-play button");
 
       buttons.forEach(addClickEvents);
-      // console.log(addClickEvents)
       function addClickEvents(button, i, a) {
         button.addEventListener("click", htmlPlayRound)
       }
@@ -126,13 +132,39 @@
         ` = = = = = = \n` +
         `::FINAL SCORES::\n` +
         `- - - - - - -`;
-        
+
         let verdict;
         if (score[1] > score[0]){
           verdict = "Well, You Lost";
         } else {verdict = "Congratulations, You beat a Randomizer"};
         finalResultsParagraph.textContent =
                `---- ${verdict} ----`;
+
+        displayRestartButton();
+      }
+
+      let topDiv = document.querySelector(".top");
+      let topParagraph = document.querySelector(".top p")
+      let restartButton = document.createElement("button");
+      restartButton.textContent = "Play Again";
+      restartButton.id = "restart"
+      function displayRestartButton() {
+        topParagraph.style.display = "none";
+        if (topDiv.contains(restartButton)) {
+          restartButton.style.display = "inline-block";
+        } else {
+          topDiv.appendChild(restartButton);
+        }
+      }
+
+      restartButton.addEventListener("click", restartGame);
+      function restartGame(){
+        restartButton.style.display = "none";
+        topParagraph.style.display = "block";
+        score = [0, 0]
+        scoreParagraph.textContent = "";
+        resultsParagraph.textContent = "";
+        finalResultsParagraph.textContent = "";
       }
 
     </script>

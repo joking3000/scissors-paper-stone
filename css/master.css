@@ -1,12 +1,37 @@
-.game-play {
-  width: 75%;
-  margin: 100px auto;
-  text-align: center;
+* {
+  margin: 0px;
+  box-sizing: border-box;
 }
+
+
+div {
+    text-align: center;
+}
+
+.game-play {
+  position: relative;
+  margin: 100px 0;
+  left: 0px;
+}
+.game-play button {
+  display: inline-block;
+}
+
 #results, #score, #final-results {
   white-space: pre-wrap;
 }
 
 #results {
   height: 100px;
+  margin-bottom: 8px;
+}
+
+.top {
+  position: absolute;
+  top: 20px;
+  width: 100%;
+}
+
+#restart {
+  margin-top: 20px;
 }
